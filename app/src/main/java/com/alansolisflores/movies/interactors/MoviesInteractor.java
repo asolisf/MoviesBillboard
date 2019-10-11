@@ -33,18 +33,18 @@ public class MoviesInteractor extends BaseInteractor implements MainContract.Int
     }
 
     @Override
-    public void getTopRanked() {
+    public void getPopular() {
         Call<MoviesResponse> call = this.moviesRequest.getTopRated(this.API_KEY);
 
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                interactorOutput.onGetTopRankedSuccess(response.body());
+                interactorOutput.onGetPopularSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                interactorOutput.onGetTopRankedError(t.getMessage());
+                interactorOutput.onGetPopularError(t.getMessage());
             }
         });
     }

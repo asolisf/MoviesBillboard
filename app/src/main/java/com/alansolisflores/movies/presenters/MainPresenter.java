@@ -16,12 +16,17 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
     }
 
     @Override
-    public void onGetTopRankedSuccess(MoviesResponse moviesResponse) {
-
+    public void loadPopular() {
+        this.interactor.getPopular();
     }
 
     @Override
-    public void onGetTopRankedError(String message) {
-        view.showMessage(message);
+    public void onGetPopularSuccess(MoviesResponse moviesResponse) {
+        this.view.setPopular(moviesResponse.getResults());
+    }
+
+    @Override
+    public void onGetPopularError(String message) {
+        this.view.showMessage(message);
     }
 }

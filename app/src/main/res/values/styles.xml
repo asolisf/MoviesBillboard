@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/montserrat_light</item>
     </style>
 
 </resources>
