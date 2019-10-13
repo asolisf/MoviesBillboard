@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.TopRankedFragment">
+    tools:context=".fragments.TopRatedFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <include layout="@layout/movies_list_layout"/>
 
+    <include
+        android:id="@+id/loadingDataLayout"
+        layout="@layout/loading_data_layout" />
 </FrameLayout>

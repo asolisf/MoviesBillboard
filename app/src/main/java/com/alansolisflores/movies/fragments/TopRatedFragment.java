@@ -13,57 +13,55 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.alansolisflores.movies.R;
-import com.alansolisflores.movies.adapters.MoviePreviewAdapter;
+import com.alansolisflores.movies.adapters.MoviesListItemAdapter;
 import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.entities.objects.Movie;
-import com.alansolisflores.movies.presenters.PopularPresenter;
+import com.alansolisflores.movies.presenters.TopRatedPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PopularFragment extends Fragment implements MoviesContract.View,
-Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
+public class TopRatedFragment extends Fragment implements MoviesContract.View,
+        Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener {
 
     private View view;
 
-    private GridView gridView;
+    private ListView listView;
 
-    private MoviePreviewAdapter moviePreviewAdapter;
+    private MoviesListItemAdapter movieListItemAdapter;
 
     private List<Movie> movieList;
 
-    private PopularPresenter presenter;
+    private TopRatedPresenter presenter;
 
     private RelativeLayout loadingDataLayout;
 
     private Toolbar customToolbar;
 
-    public PopularFragment() {
+    public TopRatedFragment() {
         this.movieList = new ArrayList<Movie>();
-        this.presenter = new PopularPresenter(this);
+        this.presenter = new TopRatedPresenter(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        this.view = inflater.inflate(R.layout.fragment_popular, container, false);
+        this.view = inflater.inflate(R.layout.fragment_top_rated, container, false);
         this.initializeProperties();
-        return this.view;
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(this.movieList.size() == 0)
-        {
+        if (this.movieList.size() == 0) {
             this.presenter.loadData();
         }
     }
@@ -77,9 +75,9 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
     public void getData(List<Movie> movieList) {
         this.movieList = movieList;
         this.loadingDataLayout.setVisibility(View.INVISIBLE);
-        this.moviePreviewAdapter
-                = new MoviePreviewAdapter(this.movieList, getContext(), R.layout.movie_preview_item);
-        this.gridView.setAdapter(this.moviePreviewAdapter);
+        this.movieListItemAdapter
+                = new MoviesListItemAdapter(this.movieList, getContext(), R.layout.movie_list_item);
+        this.listView.setAdapter(this.movieListItemAdapter);
     }
 
     @Override
@@ -92,23 +90,23 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
         this.goToDetailScreen(this.movieList.get(i));
     }
 
-    private void goToDetailScreen(Movie movie){
-        Intent intent = new Intent(getContext(),MovieDetailActivity.class);
-        intent.putExtra("title",movie.getTitle());
-        intent.putExtra("date",movie.getReleaseDate());
-        intent.putExtra("image",movie.getPosterPath());
-        intent.putExtra("overview",movie.getOverview());
-        intent.putExtra("voteAverage",movie.getVoteAverage());
+    private void goToDetailScreen(Movie movie) {
+        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra("title", movie.getTitle());
+        intent.putExtra("date", movie.getReleaseDate());
+        intent.putExtra("image", movie.getPosterPath());
+        intent.putExtra("overview", movie.getOverview());
+        intent.putExtra("voteAverage", movie.getVoteAverage());
         startActivity(intent);
     }
 
-    private void initializeProperties(){
-        this.gridView = view.findViewById(R.id.moviesGridView);
+    private void initializeProperties() {
+        this.listView = view.findViewById(R.id.moviesListView);
         this.loadingDataLayout = view.findViewById(R.id.loadingDataLayout);
         this.customToolbar = view.findViewById(R.id.toolbar);
-        this.customToolbar.setTitle(R.string.popular);
+        this.customToolbar.setTitle(R.string.top_rated);
         this.customToolbar.inflateMenu(R.menu.toolbar_menu);
         this.customToolbar.setOnMenuItemClickListener(this);
-        this.gridView.setOnItemClickListener(this);
+        this.listView.setOnItemClickListener(this);
     }
 }

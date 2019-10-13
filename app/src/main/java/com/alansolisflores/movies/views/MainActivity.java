@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.alansolisflores.movies.adapters.SectionsPagerAdapter;
 import com.alansolisflores.movies.R;
-import com.alansolisflores.movies.presenters.MainPresenter;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity
@@ -31,9 +31,16 @@ public class MainActivity extends AppCompatActivity
         this.setProperties();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.toolbar_menu,menu);
+        return true;
+    }
+
     private void setProperties(){
-        this.tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_trending));
-        this.tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_podium));
+        this.tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_flame));
+        this.tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_star));
         this.tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_event));
 
 
@@ -45,30 +52,11 @@ public class MainActivity extends AppCompatActivity
                 .addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(this.tabLayout));
 
         this.tabLayout.addOnTabSelectedListener(this);
-        getSupportActionBar().setElevation(0);
-        this.setToolbarTitle(R.string.popular);
-
-    }
-
-    private void setToolbarTitle(int res){
-        getSupportActionBar().setTitle(res);
     }
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        switch (tab.getPosition()){
-            case 0:
-                this.setToolbarTitle(R.string.popular);
-                break;
-            case 1:
-                this.setToolbarTitle(R.string.top_rated);
-                break;
-            case 2:
-                this.setToolbarTitle(R.string.upcoming);
-                break;
-            default:
-                this.setToolbarTitle(R.string.app_name);
-        }
+        this.viewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override

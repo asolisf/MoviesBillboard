@@ -1,7 +1,6 @@
 package com.alansolisflores.movies.adapters;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MoviePreviewAdapter extends BaseAdapter {
+public class MoviesListItemAdapter extends BaseAdapter {
 
     private List<Movie> movieList;
 
@@ -24,7 +23,7 @@ public class MoviePreviewAdapter extends BaseAdapter {
 
     private int layoutId;
 
-    public  MoviePreviewAdapter(List<Movie> movieList, Context context, int layoutId){
+    public  MoviesListItemAdapter(List<Movie> movieList, Context context, int layoutId){
         this.movieList = movieList;
         this.context = context;
         this.layoutId = layoutId;
@@ -47,19 +46,20 @@ public class MoviePreviewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder;
+        MoviesListItemAdapter.ViewHolder viewHolder;
 
         if(view == null){
             LayoutInflater layoutInflater = LayoutInflater.from(this.context);
             view = layoutInflater.inflate(this.layoutId,null);
-            viewHolder = new ViewHolder();
+            viewHolder = new MoviesListItemAdapter.ViewHolder();
 
             viewHolder.posterImageView = view.findViewById(R.id.posterImage);
             viewHolder.titleTextView = view.findViewById(R.id.titleTextView);
+            viewHolder.releaseDateTextView = view.findViewById(R.id.dateTextView);
 
             view.setTag(viewHolder);
         }else{
-            viewHolder = (ViewHolder) view.getTag();
+            viewHolder = (MoviesListItemAdapter.ViewHolder) view.getTag();
         }
 
         String url = Constants.IMAGE_ENDPOINT + movieList.get(i).getPosterPath();
@@ -69,6 +69,12 @@ public class MoviePreviewAdapter extends BaseAdapter {
                 .into(viewHolder.posterImageView);
 
         viewHolder.titleTextView.setText(movieList.get(i).getTitle());
+        viewHolder.releaseDateTextView.setText(
+            String.format(
+                this.context.getResources().getString(R.string.release_date),
+                movieList.get(i).getReleaseDate()
+            )
+        );
 
         return view;
     }
@@ -76,5 +82,6 @@ public class MoviePreviewAdapter extends BaseAdapter {
     public static class ViewHolder{
         private ImageView posterImageView;
         private TextView titleTextView;
+        private TextView releaseDateTextView;
     }
 }

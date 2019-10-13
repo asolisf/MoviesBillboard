@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.alansolisflores.movies.fragments.PopularFragment;
-import com.alansolisflores.movies.fragments.TopRankedFragment;
+import com.alansolisflores.movies.fragments.TopRatedFragment;
 import com.alansolisflores.movies.fragments.UpcomingFragment;
 
 public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
@@ -24,7 +24,7 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new PopularFragment();
             case 1:
-                return new TopRankedFragment();
+                return new TopRatedFragment();
             case 2:
                 return new UpcomingFragment();
             default:
