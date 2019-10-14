@@ -4,22 +4,28 @@ import com.alansolisflores.movies.entities.objects.Movie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.RealmObject;
 
 public class MoviesResponse {
 
     @SerializedName("page")
     @Expose
     private Integer page;
+
     @SerializedName("total_results")
     @Expose
     private Integer totalResults;
+
     @SerializedName("total_pages")
     @Expose
     private Integer totalPages;
+
     @SerializedName("results")
     @Expose
-    private List<Movie> results = null;
+    private List<Movie> results = new ArrayList<Movie>();
 
     public Integer getPage() {
         return page;

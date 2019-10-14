@@ -68,7 +68,7 @@ public class TopRatedFragment extends Fragment implements MoviesContract.View,
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -108,5 +108,11 @@ public class TopRatedFragment extends Fragment implements MoviesContract.View,
         this.customToolbar.inflateMenu(R.menu.toolbar_menu);
         this.customToolbar.setOnMenuItemClickListener(this);
         this.listView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        this.presenter.onDestroy();
+        super.onDestroy();
     }
 }

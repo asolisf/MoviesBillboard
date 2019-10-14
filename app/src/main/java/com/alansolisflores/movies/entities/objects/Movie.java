@@ -3,85 +3,96 @@ package com.alansolisflores.movies.entities.objects;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Movie {
+import io.realm.RealmObject;
+
+public class Movie extends RealmObject {
 
     @SerializedName("adult")
     @Expose
     private Boolean adult;
+
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
-    @SerializedName("belongs_to_collection")
-    @Expose
-    private Object belongsToCollection;
+
     @SerializedName("budget")
     @Expose
     private Integer budget;
-    @SerializedName("genres")
-    @Expose
-    private List<Genre> genres = null;
+
     @SerializedName("homepage")
     @Expose
     private String homepage;
+
     @SerializedName("id")
     @Expose
     private Integer id;
+
     @SerializedName("imdb_id")
     @Expose
     private String imdbId;
+
     @SerializedName("original_language")
     @Expose
     private String originalLanguage;
+
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
+
     @SerializedName("overview")
     @Expose
     private String overview;
+
     @SerializedName("popularity")
     @Expose
     private Double popularity;
+
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
-    @SerializedName("production_companies")
-    @Expose
-    private List<ProductionCompany> productionCompanies = null;
-    @SerializedName("production_countries")
-    @Expose
-    private List<ProductionCountry> productionCountries = null;
+
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
+
     @SerializedName("revenue")
     @Expose
     private Integer revenue;
+
     @SerializedName("runtime")
     @Expose
     private Integer runtime;
-    @SerializedName("spoken_languages")
-    @Expose
-    private List<SpokenLanguage> spokenLanguages = null;
+
     @SerializedName("status")
     @Expose
     private String status;
+
     @SerializedName("tagline")
     @Expose
     private String tagline;
+
     @SerializedName("title")
     @Expose
     private String title;
+
     @SerializedName("video")
     @Expose
     private Boolean video;
+
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
+
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
+
+    public Movie(){
+        //Realm required
+    }
 
     public Boolean getAdult() {
         return adult;
@@ -99,28 +110,12 @@ public class Movie {
         this.backdropPath = backdropPath;
     }
 
-    public Object getBelongsToCollection() {
-        return belongsToCollection;
-    }
-
-    public void setBelongsToCollection(Object belongsToCollection) {
-        this.belongsToCollection = belongsToCollection;
-    }
-
     public Integer getBudget() {
         return budget;
     }
 
     public void setBudget(Integer budget) {
         this.budget = budget;
-    }
-
-    public List<Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
     }
 
     public String getHomepage() {
@@ -187,22 +182,6 @@ public class Movie {
         this.posterPath = posterPath;
     }
 
-    public List<ProductionCompany> getProductionCompanies() {
-        return productionCompanies;
-    }
-
-    public void setProductionCompanies(List<ProductionCompany> productionCompanies) {
-        this.productionCompanies = productionCompanies;
-    }
-
-    public List<ProductionCountry> getProductionCountries() {
-        return productionCountries;
-    }
-
-    public void setProductionCountries(List<ProductionCountry> productionCountries) {
-        this.productionCountries = productionCountries;
-    }
-
     public String getReleaseDate() {
         return releaseDate;
     }
@@ -225,14 +204,6 @@ public class Movie {
 
     public void setRuntime(Integer runtime) {
         this.runtime = runtime;
-    }
-
-    public List<SpokenLanguage> getSpokenLanguages() {
-        return spokenLanguages;
-    }
-
-    public void setSpokenLanguages(List<SpokenLanguage> spokenLanguages) {
-        this.spokenLanguages = spokenLanguages;
     }
 
     public String getStatus() {

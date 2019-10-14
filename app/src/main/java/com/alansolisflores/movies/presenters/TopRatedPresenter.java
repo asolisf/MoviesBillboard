@@ -1,8 +1,11 @@
 package com.alansolisflores.movies.presenters;
 
 import com.alansolisflores.movies.contracts.MoviesContract;
-import com.alansolisflores.movies.entities.responses.MoviesResponse;
+import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.interactors.TopRatedInteractor;
+import com.alansolisflores.movies.repositories.MoviesRespository;
+
+import java.util.List;
 
 public class TopRatedPresenter implements MoviesContract.Presenter,
         MoviesContract.InteractorOutput{
@@ -11,9 +14,12 @@ public class TopRatedPresenter implements MoviesContract.Presenter,
 
     private MoviesContract.Interactor interactor;
 
+    private MoviesContract.Respository repository;
+
     public TopRatedPresenter(MoviesContract.View view){
         this.view = view;
         this.interactor = new TopRatedInteractor(this);
+        this.repository = new MoviesRespository();
     }
 
     @Override
@@ -22,8 +28,13 @@ public class TopRatedPresenter implements MoviesContract.Presenter,
     }
 
     @Override
-    public void onGetDataSuccess(MoviesResponse moviesResponse) {
-        this.view.getData(moviesResponse.getResults());
+    public void onDestroy() {
+        this.repository.Dispose();
+    }
+
+    @Override
+    public void onGetDataSuccess(List<Movie> movieList) {
+        this.view.getData(movieList);
     }
 
     @Override

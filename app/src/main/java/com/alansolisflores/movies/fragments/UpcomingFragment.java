@@ -69,7 +69,7 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -109,5 +109,11 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
         this.customToolbar.inflateMenu(R.menu.toolbar_menu);
         this.customToolbar.setOnMenuItemClickListener(this);
         this.gridView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        this.presenter.onDestroy();
+        super.onDestroy();
     }
 }

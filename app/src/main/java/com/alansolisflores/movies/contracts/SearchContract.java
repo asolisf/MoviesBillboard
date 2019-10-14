@@ -15,6 +15,6 @@ public interface SearchContract {
     }
 
     interface Repository{
-        List<Movie> getData();
+        List<Movie> getDataByTitle(String title);
     }
 }

@@ -1,8 +1,11 @@
 package com.alansolisflores.movies.presenters;
 
 import com.alansolisflores.movies.contracts.MoviesContract;
-import com.alansolisflores.movies.entities.responses.MoviesResponse;
+import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.interactors.UpcomingInteractor;
+import com.alansolisflores.movies.repositories.MoviesRespository;
+
+import java.util.List;
 
 public class UpcomingPresenter
         implements MoviesContract.Presenter,
@@ -12,9 +15,12 @@ public class UpcomingPresenter
 
     private MoviesContract.Interactor interactor;
 
+    private MoviesContract.Respository repository;
+
     public UpcomingPresenter(MoviesContract.View view){
         this.view = view;
         this.interactor = new UpcomingInteractor(this);
+        this.repository = new MoviesRespository();
     }
 
     @Override
@@ -23,8 +29,13 @@ public class UpcomingPresenter
     }
 
     @Override
-    public void onGetDataSuccess(MoviesResponse moviesResponse) {
-        this.view.getData(moviesResponse.getResults());
+    public void onDestroy() {
+        this.repository.Dispose();
+    }
+
+    @Override
+    public void onGetDataSuccess(List<Movie> movieList) {
+        this.view.getData(movieList);
     }
 
     @Override
