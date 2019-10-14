@@ -1,6 +1,5 @@
 package com.alansolisflores.movies.views;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
@@ -8,17 +7,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alansolisflores.movies.R;
+import com.alansolisflores.movies.contracts.DetailContract;
 import com.alansolisflores.movies.entities.objects.Movie;
-import com.alansolisflores.movies.helpers.Constants;
-import com.alansolisflores.movies.transformations.BlurTransformation;
+import com.alansolisflores.movies.entities.objects.Video;
+import com.alansolisflores.movies.helpers.Config;
+import com.alansolisflores.movies.presenters.DetailPresenter;
+import com.alansolisflores.movies.helpers.BlurTransformation;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
-public class MovieDetailActivity extends AppCompatActivity
-implements View.OnClickListener{
+import java.util.List;
+
+public class MovieDetailActivity extends YouTubeBaseActivity
+implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitializedListener {
 
     private Movie movie;
+    private boolean playerInitialized;
 
     private TextView titleTextView;
     private TextView dateTextView;
@@ -27,6 +37,10 @@ implements View.OnClickListener{
     private ImageView posterImageView;
     private Toolbar customToolbar;
     private ImageView movieBackgroundImageView;
+    private YouTubePlayerView playerView;
+    private YouTubePlayer youTubePlayer;
+
+    private DetailContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +53,7 @@ implements View.OnClickListener{
 
     private void getExtras(){
         Intent intent = getIntent();
+        int id = intent.getIntExtra("id",0);
         String title = intent.getStringExtra("title");
         String date = intent.getStringExtra("date");
         String image = intent.getStringExtra("image");
@@ -46,6 +61,7 @@ implements View.OnClickListener{
         double voteAverage = intent.getDoubleExtra("voteAverage",0);
 
         this.movie = new Movie();
+        this.movie.setId(id);
         this.movie.setTitle(title);
         this.movie.setReleaseDate(date);
         this.movie.setPosterPath(image);
@@ -61,19 +77,22 @@ implements View.OnClickListener{
         this.overviewTextView = findViewById(R.id.overviewTextView);
         this.voteAverageTextView = findViewById(R.id.voteAverageTextView);
         this.customToolbar = findViewById(R.id.customToolbar);
+        this.playerView = findViewById(R.id.youtubeView);
 
         this.customToolbar.setNavigationIcon(R.drawable.ic_left_arrow);
         this.customToolbar.setNavigationOnClickListener(this);
+        this.presenter = new DetailPresenter(this);
+        this.playerView.initialize(Config.GOOGLE_KEY,this);
     }
 
     private void setDataToProperties(){
         Picasso.get()
-                .load(Constants.IMAGE_ENDPOINT+this.movie.getPosterPath())
+                .load(Config.IMAGE_ENDPOINT+this.movie.getPosterPath())
                 .error(R.drawable.image_not_available)
                 .into(this.posterImageView);
 
         Picasso.get()
-                .load(Constants.IMAGE_ENDPOINT+this.movie.getPosterPath())
+                .load(Config.IMAGE_ENDPOINT+this.movie.getPosterPath())
                 .fit()
                 .centerCrop()
                 .transform(new BlurTransformation(this))
@@ -86,10 +105,37 @@ implements View.OnClickListener{
                 getResources().getString(R.string.release_date),
                 this.movie.getReleaseDate()));
         this.customToolbar.setTitle(this.movie.getTitle());
+        this.presenter.LoadData(this.movie.getId());
     }
 
     @Override
     public void onClick(View view) {
         finish();
+    }
+
+    @Override
+    public void ShowMessage(String Message) {
+        Toast.makeText(this,Message,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void GetData(List<Video> videoList) {
+        if(videoList.size() > 0 && this.youTubePlayer != null){
+            this.youTubePlayer.cueVideo(videoList.get(0).getId());
+        }
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider,
+                                        YouTubePlayer youTubePlayer, boolean b) {
+        this.youTubePlayer = youTubePlayer;
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                        YouTubeInitializationResult youTubeInitializationResult) {
+        String error = String.format(getString(R.string.player_error),
+                                                youTubeInitializationResult.toString());
+        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 }

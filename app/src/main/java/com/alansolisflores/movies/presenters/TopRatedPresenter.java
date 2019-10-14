@@ -23,22 +23,22 @@ public class TopRatedPresenter implements MoviesContract.Presenter,
     }
 
     @Override
-    public void loadData() {
-        this.interactor.getData();
+    public void LoadData() {
+        this.interactor.GetData();
     }
 
     @Override
-    public void onDestroy() {
+    public void OnDestroy() {
         this.repository.Dispose();
     }
 
     @Override
-    public void onGetDataSuccess(List<Movie> movieList) {
-        this.view.getData(movieList);
+    public void OnGetDataSuccess(List<Movie> movieList) {
+        this.view.GetData(movieList);
     }
 
     @Override
     public void onGetDataError(String message) {
-        this.view.showMessage(message);
+        this.view.ShowMessage(message);
     }
 }

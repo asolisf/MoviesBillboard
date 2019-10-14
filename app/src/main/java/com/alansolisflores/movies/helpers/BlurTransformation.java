@@ -1,4 +1,4 @@
-package com.alansolisflores.movies.transformations;
+package com.alansolisflores.movies.helpers;
 
 import android.content.Context;
 import android.graphics.Bitmap;

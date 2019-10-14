@@ -1,7 +1,7 @@
 package com.alansolisflores.movies.entities.requests;
 
-import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.entities.responses.MoviesResponse;
+import com.alansolisflores.movies.entities.responses.VideosResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,6 +19,9 @@ public interface MoviesRequest {
     @GET("movie/upcoming")
     Call<MoviesResponse> getUpcoming(@Query("api_key") String apiKey);
 
-    @GET("movie/{id}")
-    Call<Movie> getMovie(@Path("id") int id, @Query("api_key") String apiKey);
+    @GET("movie/{id}/videos")
+    Call<VideosResponse> getVideos(@Path("id") int id, @Query("api_key") String apiKey);
+
+    @GET("search/movie")
+    Call<MoviesResponse> getSearchMovies(@Query("query") String title, @Query("api_key") String apiKey);
 }

@@ -11,22 +11,22 @@ import java.util.List;
 public interface MoviesContract {
 
     interface View{
-        void showMessage(String message);
-        void getData(List<Movie> movieList);
+        void ShowMessage(String message);
+        void GetData(List<Movie> movieList);
     }
 
     interface Presenter{
-        void loadData();
-        void onDestroy();
+        void LoadData();
+        void OnDestroy();
     }
 
     interface Interactor{
-        void getData();
+        void GetData();
         void Dispose();
     }
 
     interface InteractorOutput{
-        void onGetDataSuccess(List<Movie> movieList);
+        void OnGetDataSuccess(List<Movie> movieList);
         void onGetDataError(String message);
     }
 

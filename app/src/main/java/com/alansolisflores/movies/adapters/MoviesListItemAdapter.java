@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.entities.objects.Movie;
-import com.alansolisflores.movies.helpers.Constants;
+import com.alansolisflores.movies.helpers.Config;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -62,7 +62,7 @@ public class MoviesListItemAdapter extends BaseAdapter {
             viewHolder = (MoviesListItemAdapter.ViewHolder) view.getTag();
         }
 
-        String url = Constants.IMAGE_ENDPOINT + movieList.get(i).getPosterPath();
+        String url = Config.IMAGE_ENDPOINT + movieList.get(i).getPosterPath();
         Picasso.get()
                 .load(url)
                 .error(R.drawable.image_not_available)

@@ -1,13 +1,10 @@
 package com.alansolisflores.movies.presenters;
 
 import com.alansolisflores.movies.contracts.MoviesContract;
-import com.alansolisflores.movies.entities.enums.Section;
 import com.alansolisflores.movies.entities.objects.Movie;
-import com.alansolisflores.movies.entities.responses.MoviesResponse;
 import com.alansolisflores.movies.interactors.PopularInteractor;
 import com.alansolisflores.movies.repositories.MoviesRespository;
 
-import java.util.Date;
 import java.util.List;
 
 public class PopularPresenter
@@ -26,22 +23,22 @@ public class PopularPresenter
     }
 
     @Override
-    public void loadData() {
-        this.interactor.getData();
+    public void LoadData() {
+        this.interactor.GetData();
     }
 
     @Override
-    public void onDestroy() {
+    public void OnDestroy() {
         this.repository.Dispose();
     }
 
     @Override
-    public void onGetDataSuccess(List<Movie> movieList) {
-        this.view.getData(movieList);
+    public void OnGetDataSuccess(List<Movie> movieList) {
+        this.view.GetData(movieList);
     }
 
     @Override
     public void onGetDataError(String message) {
-        this.view.showMessage(message);
+        this.view.ShowMessage(message);
     }
 }

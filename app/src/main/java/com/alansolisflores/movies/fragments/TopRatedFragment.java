@@ -23,6 +23,7 @@ import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.TopRatedPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
+import com.alansolisflores.movies.views.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,17 +63,17 @@ public class TopRatedFragment extends Fragment implements MoviesContract.View,
         super.onActivityCreated(savedInstanceState);
 
         if (this.movieList.size() == 0) {
-            this.presenter.loadData();
+            this.presenter.LoadData();
         }
     }
 
     @Override
-    public void showMessage(String message) {
+    public void ShowMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void getData(List<Movie> movieList) {
+    public void GetData(List<Movie> movieList) {
         this.movieList = movieList;
         this.loadingDataLayout.setVisibility(View.INVISIBLE);
         this.movieListItemAdapter
@@ -82,7 +83,19 @@ public class TopRatedFragment extends Fragment implements MoviesContract.View,
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        return false;
+
+        switch (item.getItemId()){
+            case R.id.searchItem:
+                this.goToSearchScreen();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void goToSearchScreen(){
+        Intent intent = new Intent(getContext(), SearchActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -92,6 +105,7 @@ public class TopRatedFragment extends Fragment implements MoviesContract.View,
 
     private void goToDetailScreen(Movie movie) {
         Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra("id",movie.getId());
         intent.putExtra("title", movie.getTitle());
         intent.putExtra("date", movie.getReleaseDate());
         intent.putExtra("image", movie.getPosterPath());
@@ -112,7 +126,7 @@ public class TopRatedFragment extends Fragment implements MoviesContract.View,
 
     @Override
     public void onDestroy() {
-        this.presenter.onDestroy();
+        this.presenter.OnDestroy();
         super.onDestroy();
     }
 }

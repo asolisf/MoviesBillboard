@@ -1,6 +1,6 @@
 package com.alansolisflores.movies.repositories;
 
-import com.alansolisflores.movies.MyApplication;
+import com.alansolisflores.movies.App;
 import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.entities.enums.Section;
@@ -18,7 +18,7 @@ public class MoviesRespository implements MoviesContract.Respository, SearchCont
     private Realm realm;
 
     public MoviesRespository(){
-        Realm.init(MyApplication.getAppContext());
+        Realm.init(App.getAppContext());
 
         this.realm = Realm.getDefaultInstance();
     }
@@ -67,7 +67,11 @@ public class MoviesRespository implements MoviesContract.Respository, SearchCont
     }
 
     @Override
-    public List<Movie> getDataByTitle(String title) {
-        return null;
+    public List<Movie> GetDataByTitle(String title) {
+        RealmResults<Movie> result =
+                this.realm.where(Movie.class)
+                        .equalTo("title",title)
+                        .findAll();
+        return this.realm.copyFromRealm(result);
     }
 }
