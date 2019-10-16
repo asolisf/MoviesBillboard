@@ -10,4 +10,9 @@
     <include
         android:id="@+id/loadingDataLayout"
         layout="@layout/loading_data_layout" />
+
+    <include
+        android:id="@+id/errorLayout"
+        layout="@layout/error_layout"
+        android:visibility="invisible"/>
 </FrameLayout>

@@ -8,10 +8,12 @@ import com.alansolisflores.movies.entities.responses.MoviesResponse;
 import java.util.Date;
 import java.util.List;
 
+import dagger.Provides;
+
 public interface MoviesContract {
 
     interface View{
-        void ShowMessage(String message);
+        void ShowError(String message);
         void GetData(List<Movie> movieList);
     }
 
@@ -27,10 +29,10 @@ public interface MoviesContract {
 
     interface InteractorOutput{
         void OnGetDataSuccess(List<Movie> movieList);
-        void onGetDataError(String message);
+        void OnGetDataError(String message);
     }
 
-    interface Respository{
+    interface Repository {
         void SaveDataBySection(List<Movie> movieList,Section section, Date updated);
         List<Movie> GetDataBySection(Section section);
         void Dispose();

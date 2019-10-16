@@ -6,15 +6,19 @@ import com.alansolisflores.movies.interactors.SearchInteractor;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class SearchPresenter implements SearchContract.Presenter,SearchContract.InteractorOutput {
 
-    private SearchContract.Interactor interactor;
+    private final SearchContract.Interactor interactor;
 
-    private SearchContract.View view;
+    private final SearchContract.View view;
 
-    public SearchPresenter(SearchContract.View view){
+    @Inject
+    public SearchPresenter(SearchContract.View view,
+                           SearchContract.Interactor interactor){
         this.view = view;
-        this.interactor = new SearchInteractor(this);
+        this.interactor = interactor;
     }
 
     @Override

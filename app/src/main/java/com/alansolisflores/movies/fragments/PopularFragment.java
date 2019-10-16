@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.adapters.MoviePreviewAdapter;
+import com.alansolisflores.movies.components.DaggerPresenterComponent;
+import com.alansolisflores.movies.components.PresenterComponent;
 import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.PopularPresenter;
@@ -27,6 +29,8 @@ import com.alansolisflores.movies.views.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class PopularFragment extends Fragment implements MoviesContract.View,
 Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
@@ -39,15 +43,19 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     private List<Movie> movieList;
 
-    private PopularPresenter presenter;
+    @Inject
+    private MoviesContract.Presenter presenter;
 
     private RelativeLayout loadingDataLayout;
 
     private Toolbar customToolbar;
 
-    public PopularFragment() {
+    private RelativeLayout errorLayout;
+
+    public PopularFragment(){
         this.movieList = new ArrayList<Movie>();
-        this.presenter = new PopularPresenter(this);
+        PresenterComponent presenterComponent = DaggerPresenterComponent.create();
+        presenterComponent.Inject(this);
     }
 
     @Override
@@ -70,7 +78,8 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
     }
 
     @Override
-    public void ShowMessage(String message) {
+    public void ShowError(String message) {
+        this.errorLayout.setVisibility(View.VISIBLE);
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
@@ -120,6 +129,7 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
         this.gridView = view.findViewById(R.id.moviesGridView);
         this.loadingDataLayout = view.findViewById(R.id.loadingDataLayout);
         this.customToolbar = view.findViewById(R.id.toolbar);
+        this.errorLayout = view.findViewById(R.id.errorLayout);
         this.customToolbar.setTitle(R.string.popular);
         this.customToolbar.inflateMenu(R.menu.toolbar_menu);
         this.customToolbar.setOnMenuItemClickListener(this);

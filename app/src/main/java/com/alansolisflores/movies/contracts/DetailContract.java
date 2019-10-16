@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DetailContract {
     interface View{
-        void ShowMessage(String Message);
+        void ShowError(String Message);
         void GetData(List<Video> videoList);
     }
 

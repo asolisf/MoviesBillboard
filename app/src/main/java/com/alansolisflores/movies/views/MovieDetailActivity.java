@@ -10,6 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alansolisflores.movies.R;
+import com.alansolisflores.movies.components.DaggerInteractorComponent;
+import com.alansolisflores.movies.components.DaggerPresenterComponent;
+import com.alansolisflores.movies.components.PresenterComponent;
 import com.alansolisflores.movies.contracts.DetailContract;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.entities.objects.Video;
@@ -23,6 +26,8 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class MovieDetailActivity extends YouTubeBaseActivity
 implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitializedListener {
@@ -40,7 +45,13 @@ implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitialize
     private YouTubePlayerView playerView;
     private YouTubePlayer youTubePlayer;
 
+    @Inject
     private DetailContract.Presenter presenter;
+
+    public MovieDetailActivity(){
+        PresenterComponent presenterComponent = DaggerPresenterComponent.create();
+        presenterComponent.Inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +92,7 @@ implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitialize
 
         this.customToolbar.setNavigationIcon(R.drawable.ic_left_arrow);
         this.customToolbar.setNavigationOnClickListener(this);
-        this.presenter = new DetailPresenter(this);
+        //this.presenter = new DetailPresenter(this);
         this.playerView.initialize(Config.GOOGLE_KEY,this);
     }
 
@@ -114,7 +125,7 @@ implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitialize
     }
 
     @Override
-    public void ShowMessage(String Message) {
+    public void ShowError(String Message) {
         Toast.makeText(this,Message,Toast.LENGTH_LONG).show();
     }
 

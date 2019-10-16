@@ -1,14 +1,16 @@
 package com.alansolisflores.movies.interactors;
 
-import com.alansolisflores.movies.App;
+
 import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.entities.objects.Movie;
+import com.alansolisflores.movies.entities.requests.MoviesRequest;
 import com.alansolisflores.movies.entities.responses.MoviesResponse;
 import com.alansolisflores.movies.helpers.Config;
-import com.alansolisflores.movies.repositories.MoviesRespository;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,19 +20,25 @@ public class SearchInteractor implements SearchContract.Interactor, Callback<Mov
 
     private SearchContract.InteractorOutput interactorOutput;
 
-    private SearchContract.Repository repository;
-
     private String title;
 
-    public SearchInteractor(SearchContract.InteractorOutput interactorOutput){
+    private final SearchContract.Repository repository;
+
+    private final MoviesRequest moviesRequest;
+
+    @Inject
+    public SearchInteractor(SearchContract.InteractorOutput interactorOutput,
+                             SearchContract.Repository repository,
+                             MoviesRequest moviesRequest){
         this.interactorOutput = interactorOutput;
-        this.repository = new MoviesRespository();
+        this.repository = repository;
+        this.moviesRequest = moviesRequest;
     }
 
     @Override
     public void LoadDataByTitle(String title) {
         this.title = title;
-        Call<MoviesResponse> call = App.getApiService().getSearchMovies(title, Config.API_KEY);
+        Call<MoviesResponse> call = moviesRequest.getSearchMovies(title, Config.API_KEY);
 
         call.enqueue(this);
     }
@@ -45,15 +53,23 @@ public class SearchInteractor implements SearchContract.Interactor, Callback<Mov
         if(response.isSuccessful()){
             this.interactorOutput.OnGetDataSuccess(response.body().getResults());
         }else {
-            this.interactorOutput.OnGetDataSuccess(this.loadDataFromCache());
-            this.interactorOutput.OnGetDataError(response.message());
+            List<Movie> movieList = this.loadDataFromCache();
+            if(movieList.size() == 0){
+                this.interactorOutput.OnGetDataError(response.message());
+            }else {
+                this.interactorOutput.OnGetDataSuccess(movieList);
+            }
         }
     }
 
     @Override
     public void onFailure(Call<MoviesResponse> call, Throwable t) {
-        this.interactorOutput.OnGetDataSuccess(this.loadDataFromCache());
-        this.interactorOutput.OnGetDataError(t.getMessage());
+        List<Movie> movieList = this.loadDataFromCache();
+        if(movieList.size() == 0){
+            this.interactorOutput.OnGetDataError(Config.NETWORK_ERROR);
+        }else {
+            this.interactorOutput.OnGetDataSuccess(movieList);
+        }
     }
 
     private List<Movie> loadDataFromCache(){

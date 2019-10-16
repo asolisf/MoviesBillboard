@@ -1,6 +1,5 @@
 package com.alansolisflores.movies.repositories;
 
-import com.alansolisflores.movies.App;
 import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.entities.enums.Section;
@@ -10,49 +9,48 @@ import com.alansolisflores.movies.entities.objects.MovieCache;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class MoviesRespository implements MoviesContract.Respository, SearchContract.Repository {
+public class MoviesRespository implements MoviesContract.Repository, SearchContract.Repository {
 
     private Realm realm;
 
-    public MoviesRespository(){
-        Realm.init(App.getAppContext());
-
-        this.realm = Realm.getDefaultInstance();
-    }
+    @Inject
+    public MoviesRespository(){}
 
     @Override
     public void SaveDataBySection(List<Movie> movieList,Section section, Date updated) {
 
         this.deleteDataBySection(section);
 
-        this.realm.beginTransaction();
+        this.getRealmInstance().beginTransaction();
         MovieCache movieCache = new MovieCache(section,updated);
         for (Movie movie: movieList) {
             movieCache.getMovieList().add(movie);
         }
-        this.realm.copyToRealm(movieCache);
-        this.realm.commitTransaction();
+        this.getRealmInstance().copyToRealm(movieCache);
+        this.getRealmInstance().commitTransaction();
     }
 
     private void deleteDataBySection(Section section){
-        this.realm.beginTransaction();
+        this.getRealmInstance().beginTransaction();
         RealmResults<MovieCache> results =
-                this.realm.where(MovieCache.class)
+                this.getRealmInstance().where(MovieCache.class)
                           .equalTo("section",section.toString())
                           .findAll();
 
         results.deleteAllFromRealm();
-        this.realm.commitTransaction();
+        this.getRealmInstance().commitTransaction();
     }
 
     @Override
     public List<Movie> GetDataBySection(Section section) {
 
         MovieCache result =
-                this.realm.where(MovieCache.class)
+                this.getRealmInstance().where(MovieCache.class)
                           .equalTo("section",section.toString())
                           .findAll()
                           .first();
@@ -63,15 +61,23 @@ public class MoviesRespository implements MoviesContract.Respository, SearchCont
 
     @Override
     public void Dispose() {
-        this.realm.close();
+        this.getRealmInstance().close();
     }
 
     @Override
     public List<Movie> GetDataByTitle(String title) {
         RealmResults<Movie> result =
-                this.realm.where(Movie.class)
+                this.getRealmInstance().where(Movie.class)
                         .equalTo("title",title)
                         .findAll();
-        return this.realm.copyFromRealm(result);
+        return this.getRealmInstance().copyFromRealm(result);
+    }
+
+    private Realm getRealmInstance(){
+        if(this.realm == null){
+            this.realm = Realm.getDefaultInstance();
+        }
+
+        return this.realm;
     }
 }

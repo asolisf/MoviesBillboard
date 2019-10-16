@@ -13,12 +13,16 @@ import android.widget.Toast;
 
 import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.adapters.MoviesListItemAdapter;
+import com.alansolisflores.movies.components.DaggerPresenterComponent;
+import com.alansolisflores.movies.components.PresenterComponent;
 import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.SearchPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View,
          SearchView.OnQueryTextListener, ListView.OnItemClickListener, View.OnClickListener {
@@ -33,9 +37,15 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     private ImageView backImage;
 
+    @Inject
     private SearchContract.Presenter presenter;
 
     private final int MIN_LENGTH = 2;
+
+    public SearchActivity(){
+        PresenterComponent presenterComponent = DaggerPresenterComponent.create();
+        presenterComponent.Inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +74,12 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         this.searchView = findViewById(R.id.searchView);
         this.backImage = findViewById(R.id.backImageView);
 
-        this.presenter = new SearchPresenter(this);
+        //this.presenter = new SearchPresenter(this);
         this.movieList = new ArrayList<Movie>();
 
         this.searchView.setOnQueryTextListener(this);
+        this.searchView.setFocusable(true);
+        this.searchView.setIconified(false);
     }
 
     @Override

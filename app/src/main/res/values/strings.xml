@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Movies</string>
+    <string name="app_name">MBillboard</string>
     <string name="top_rated">Top rated</string>
     <string name="popular">Popular</string>
     <string name="upcoming">Upcoming</string>
@@ -11,5 +11,6 @@
     <string name="release_date">Release date %s</string>
     <string name="player_error">Error initializing YouTube player %s</string>
     <string name="title_min_length">Title minimum length maybe three letters</string>
-    <string name="title">Title</string>
+    <string name="search_by_title">Search by title</string>
+    <string name="something_went_wrong">Something went wrong</string>
 </resources>

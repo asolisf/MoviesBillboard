@@ -7,19 +7,19 @@ import com.alansolisflores.movies.repositories.MoviesRespository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class TopRatedPresenter implements MoviesContract.Presenter,
         MoviesContract.InteractorOutput{
 
-    private MoviesContract.View view;
+    private final MoviesContract.View view;
 
-    private MoviesContract.Interactor interactor;
+    private final MoviesContract.Interactor interactor;
 
-    private MoviesContract.Respository repository;
-
-    public TopRatedPresenter(MoviesContract.View view){
+    @Inject
+    public TopRatedPresenter(MoviesContract.View view,MoviesContract.Interactor interactor){
         this.view = view;
-        this.interactor = new TopRatedInteractor(this);
-        this.repository = new MoviesRespository();
+        this.interactor = interactor;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class TopRatedPresenter implements MoviesContract.Presenter,
 
     @Override
     public void OnDestroy() {
-        this.repository.Dispose();
+        this.interactor.Dispose();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TopRatedPresenter implements MoviesContract.Presenter,
     }
 
     @Override
-    public void onGetDataError(String message) {
-        this.view.ShowMessage(message);
+    public void OnGetDataError(String message) {
+        this.view.ShowError(message);
     }
 }

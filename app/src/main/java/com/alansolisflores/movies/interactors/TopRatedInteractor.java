@@ -1,15 +1,17 @@
 package com.alansolisflores.movies.interactors;
 
-import com.alansolisflores.movies.App;
 import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.entities.enums.Section;
 import com.alansolisflores.movies.entities.objects.Movie;
+import com.alansolisflores.movies.entities.requests.MoviesRequest;
 import com.alansolisflores.movies.entities.responses.MoviesResponse;
 import com.alansolisflores.movies.helpers.Config;
-import com.alansolisflores.movies.repositories.MoviesRespository;
 
 import java.util.Date;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,17 +21,22 @@ public class TopRatedInteractor implements MoviesContract.Interactor, Callback<M
 
     private MoviesContract.InteractorOutput interactorOutput;
 
-    private MoviesContract.Respository repository;
+    private final MoviesContract.Repository repository;
 
-    public TopRatedInteractor(MoviesContract.InteractorOutput interactorOutput){
+    private final MoviesRequest moviesRequest;
+
+    @Inject
+    public TopRatedInteractor(@Named("InteractorOutputPresenter") MoviesContract.InteractorOutput interactorOutput,
+                             MoviesContract.Repository repository,
+                             MoviesRequest moviesRequest){
         this.interactorOutput = interactorOutput;
-        this.repository = new MoviesRespository();
+        this.repository = repository;
+        this.moviesRequest = moviesRequest;
     }
-
     @Override
     public void GetData() {
         Call<MoviesResponse> moviesResponseCall
-                = App.getApiService().getTopRated(Config.API_KEY);
+                = moviesRequest.getTopRated(Config.API_KEY);
 
         moviesResponseCall.enqueue(this);
     }
@@ -43,17 +50,25 @@ public class TopRatedInteractor implements MoviesContract.Interactor, Callback<M
     public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
         if(response.isSuccessful()){
             this.saveDataInCache(response.body().getResults());
-            interactorOutput.OnGetDataSuccess(response.body().getResults());
+            this.interactorOutput.OnGetDataSuccess(response.body().getResults());
         }else {
-            interactorOutput.OnGetDataSuccess(this.loadDataFromCache());
-            interactorOutput.onGetDataError(response.message());
+            List<Movie> movieList = this.loadDataFromCache();
+            if(movieList.size() == 0){
+                this.interactorOutput.OnGetDataError(response.message());
+            }else {
+                this.interactorOutput.OnGetDataSuccess(movieList);
+            }
         }
     }
 
     @Override
     public void onFailure(Call<MoviesResponse> call, Throwable t) {
-        interactorOutput.OnGetDataSuccess(this.loadDataFromCache());
-        interactorOutput.onGetDataError(t.getMessage());
+        List<Movie> movieList = this.loadDataFromCache();
+        if(movieList.size() == 0){
+            this.interactorOutput.OnGetDataError(Config.NETWORK_ERROR);
+        }else {
+            this.interactorOutput.OnGetDataSuccess(movieList);
+        }
     }
 
     private void saveDataInCache(List<Movie> movieList){

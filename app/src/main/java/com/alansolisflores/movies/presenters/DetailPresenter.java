@@ -1,21 +1,25 @@
 package com.alansolisflores.movies.presenters;
 
 import com.alansolisflores.movies.contracts.DetailContract;
+import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.entities.objects.Video;
 import com.alansolisflores.movies.interactors.DetailInteractor;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DetailPresenter implements  DetailContract.Presenter,DetailContract.InteractorOutput {
 
     private DetailContract.View view;
 
-    private DetailContract.Interactor interactor;
+    private final DetailContract.Interactor interactor;
 
-    public DetailPresenter(DetailContract.View view){
-
+    @Inject
+    public DetailPresenter(DetailContract.View view,
+                          DetailContract.Interactor interactor){
         this.view = view;
-        this.interactor = new DetailInteractor(this);
+        this.interactor = interactor;
     }
 
     @Override
@@ -25,7 +29,7 @@ public class DetailPresenter implements  DetailContract.Presenter,DetailContract
 
     @Override
     public void onGetDataError(String message) {
-        this.view.ShowMessage(message);
+        this.view.ShowError(message);
     }
 
     @Override

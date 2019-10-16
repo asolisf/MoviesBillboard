@@ -19,5 +19,5 @@
         android:layout_below="@id/filmImageView"
         android:layout_centerHorizontal="true"
         android:textSize="25dp"
-        android:text="@string/data_not_found"/>
+        android:text="@string/something_went_wrong"/>
 </RelativeLayout>
