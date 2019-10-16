@@ -2,7 +2,7 @@ package com.alansolisflores.movies.interactors;
 
 
 import com.alansolisflores.movies.contracts.DetailContract;
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.entities.requests.MoviesRequest;
 import com.alansolisflores.movies.entities.responses.VideosResponse;
 import com.alansolisflores.movies.helpers.Config;
@@ -17,13 +17,13 @@ public class DetailInteractor implements DetailContract.Interactor, Callback<Vid
 
     private DetailContract.InteractorOutput interactorOutput;
 
-    private final MoviesContract.Repository moviesRepository;
+    private final PopularContract.Repository moviesRepository;
 
     private final MoviesRequest moviesRequest;
 
     @Inject
     public DetailInteractor(DetailContract.InteractorOutput interactorOutput,
-                             MoviesContract.Repository moviesRepository,
+                             PopularContract.Repository moviesRepository,
                              MoviesRequest moviesRequest){
         this.interactorOutput = interactorOutput;
         this.moviesRepository = moviesRepository;

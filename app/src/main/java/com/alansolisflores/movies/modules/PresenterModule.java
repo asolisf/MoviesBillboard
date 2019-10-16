@@ -1,8 +1,10 @@
 package com.alansolisflores.movies.modules;
 
 import com.alansolisflores.movies.contracts.DetailContract;
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.contracts.SearchContract;
+import com.alansolisflores.movies.contracts.TopRatedContract;
+import com.alansolisflores.movies.contracts.UpcomingContract;
 import com.alansolisflores.movies.presenters.DetailPresenter;
 import com.alansolisflores.movies.presenters.PopularPresenter;
 import com.alansolisflores.movies.presenters.SearchPresenter;
@@ -18,27 +20,32 @@ import dagger.Module;
 public abstract class PresenterModule {
 
     @Binds
-    @Named("PopularPresenter")
-    abstract MoviesContract.Presenter providesPopularPresenter(PopularPresenter popularPresenter);
+    abstract PopularContract.InteractorOutput ProvidePopularInteractorOutput(PopularPresenter popularPresenter);
 
     @Binds
-    @Named("UpcomingPresenter")
-    abstract MoviesContract.Presenter providesUpcomingPresenter(UpcomingPresenter upcomingPresenter);
+    abstract TopRatedContract.InteractorOutput ProvideTopRatedInteractorOutput(TopRatedPresenter topRatedPresenter);
 
     @Binds
-    @Named("TopRatedPresenter")
-    abstract MoviesContract.Presenter providesTopRatedPresenter(TopRatedPresenter topRatedPresenter);
+    abstract UpcomingContract.InteractorOutput ProvideUpcomingInteractorOutput(UpcomingPresenter upcomingPresenter);
 
     @Binds
-    @Named("DetailPresenter")
-    abstract DetailContract.Presenter providesDetailPresenter(DetailPresenter detailPresenter);
+    abstract SearchContract.InteractorOutput ProvideSearchInteractorOutput(SearchPresenter searchPresenter);
 
     @Binds
-    @Named("SearchPresenter")
-    abstract SearchContract.Presenter searchPresenter(SearchPresenter searchPresenter);
+    abstract DetailContract.InteractorOutput ProvideDetailInteractorOutput(DetailPresenter detailPresenter);
 
     @Binds
-    @Named("InteractorOutputPresenter")
-    abstract MoviesContract.InteractorOutput providesTopRatedInteractorOutput(TopRatedPresenter topRatedPresenter);
+    abstract PopularContract.Presenter ProvidePopularPresenter(PopularPresenter popularPresenter);
 
+    @Binds
+    abstract TopRatedContract.Presenter ProvideTopRatedPresenter(TopRatedPresenter topRatedPresenter);
+
+    @Binds
+    abstract UpcomingContract.Presenter ProvideUpcomingPresenter(UpcomingPresenter upcomingPresenter);
+
+    @Binds
+    abstract SearchContract.Presenter ProvideSearchPresenter(SearchPresenter searchPresenter);
+
+    @Binds
+    abstract DetailContract.Presenter ProvideDetailPresenter(DetailPresenter detailPresenter);
 }

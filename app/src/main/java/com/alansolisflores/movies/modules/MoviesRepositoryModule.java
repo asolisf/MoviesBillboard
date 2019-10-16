@@ -1,6 +1,6 @@
 package com.alansolisflores.movies.modules;
 
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.repositories.MoviesRespository;
 
@@ -11,7 +11,7 @@ import dagger.Provides;
 public class MoviesRepositoryModule {
 
     @Provides
-    public MoviesContract.Repository provideMoviesRepository(){
+    public PopularContract.Repository provideMoviesRepository(){
         return new MoviesRespository();
     }
 

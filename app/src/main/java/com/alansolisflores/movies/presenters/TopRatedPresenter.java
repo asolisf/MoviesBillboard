@@ -1,23 +1,22 @@
 package com.alansolisflores.movies.presenters;
 
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
+import com.alansolisflores.movies.contracts.TopRatedContract;
 import com.alansolisflores.movies.entities.objects.Movie;
-import com.alansolisflores.movies.interactors.TopRatedInteractor;
-import com.alansolisflores.movies.repositories.MoviesRespository;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class TopRatedPresenter implements MoviesContract.Presenter,
-        MoviesContract.InteractorOutput{
+public class TopRatedPresenter implements TopRatedContract.Presenter,
+        TopRatedContract.InteractorOutput{
 
-    private final MoviesContract.View view;
+    private final TopRatedContract.View view;
 
-    private final MoviesContract.Interactor interactor;
+    private final TopRatedContract.Interactor interactor;
 
     @Inject
-    public TopRatedPresenter(MoviesContract.View view,MoviesContract.Interactor interactor){
+    public TopRatedPresenter(TopRatedContract.View view, TopRatedContract.Interactor interactor){
         this.view = view;
         this.interactor = interactor;
     }

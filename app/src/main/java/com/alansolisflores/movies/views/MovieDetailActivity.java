@@ -10,15 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alansolisflores.movies.R;
-import com.alansolisflores.movies.components.DaggerInteractorComponent;
+//import com.alansolisflores.movies.components.DaggerPresenterComponent;
 import com.alansolisflores.movies.components.DaggerPresenterComponent;
-import com.alansolisflores.movies.components.PresenterComponent;
 import com.alansolisflores.movies.contracts.DetailContract;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.entities.objects.Video;
 import com.alansolisflores.movies.helpers.Config;
-import com.alansolisflores.movies.presenters.DetailPresenter;
 import com.alansolisflores.movies.helpers.BlurTransformation;
+import com.alansolisflores.movies.presenters.DetailPresenter;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -33,7 +32,6 @@ public class MovieDetailActivity extends YouTubeBaseActivity
 implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitializedListener {
 
     private Movie movie;
-    private boolean playerInitialized;
 
     private TextView titleTextView;
     private TextView dateTextView;
@@ -46,11 +44,11 @@ implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitialize
     private YouTubePlayer youTubePlayer;
 
     @Inject
-    private DetailContract.Presenter presenter;
+    DetailPresenter presenter;
 
     public MovieDetailActivity(){
-        PresenterComponent presenterComponent = DaggerPresenterComponent.create();
-        presenterComponent.Inject(this);
+        //DaggerPresenterComponent.builder().viewModule(new ViewModule(this)).build();
+        DaggerPresenterComponent.builder().build().Inject(this);
     }
 
     @Override

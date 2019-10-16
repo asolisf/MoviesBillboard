@@ -2,7 +2,7 @@ package com.alansolisflores.movies.interactors;
 
 import com.alansolisflores.movies.components.DaggerInteractorComponent;
 import com.alansolisflores.movies.components.InteractorComponent;
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.modules.ApiServiceModuleMock;
 import com.alansolisflores.movies.modules.MoviesRepositoryModuleMock;
 
@@ -20,13 +20,13 @@ import static org.mockito.Mockito.when;
 public class PopularInteractorTest {
 
     @Mock
-    public MoviesContract.InteractorOutput interactorOutput;
+    public PopularContract.InteractorOutput interactorOutput;
 
     @Mock
-    public MoviesContract.Repository repository;
+    public PopularContract.Repository repository;
 
 
-    public MoviesContract.Interactor popularInteractor;
+    public PopularContract.Interactor popularInteractor;
 
     @Before
     public void SetUp() throws Exception{

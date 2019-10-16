@@ -19,9 +19,9 @@ import android.widget.Toast;
 
 import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.adapters.MoviesListItemAdapter;
-import com.alansolisflores.movies.components.DaggerPresenterComponent;
 import com.alansolisflores.movies.components.PresenterComponent;
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
+import com.alansolisflores.movies.contracts.TopRatedContract;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.TopRatedPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
@@ -31,8 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-public class TopRatedFragment extends Fragment implements MoviesContract.View,
+public class TopRatedFragment extends Fragment implements TopRatedContract.View,
         Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener {
 
     private View view;
@@ -43,8 +44,8 @@ public class TopRatedFragment extends Fragment implements MoviesContract.View,
 
     private List<Movie> movieList;
 
-    @Inject
-    private TopRatedPresenter presenter;
+    //@Inject
+    TopRatedPresenter presenter;
 
     private RelativeLayout loadingDataLayout;
 
@@ -54,8 +55,8 @@ public class TopRatedFragment extends Fragment implements MoviesContract.View,
 
     public TopRatedFragment(){
         this.movieList = new ArrayList<Movie>();
-        PresenterComponent presenterComponent = DaggerPresenterComponent.create();
-        presenterComponent.Inject(this);
+        //PresenterComponent presenterComponent = DaggerPresenterComponent.create();
+        //presenterComponent.Inject(this);
     }
 
     @Override

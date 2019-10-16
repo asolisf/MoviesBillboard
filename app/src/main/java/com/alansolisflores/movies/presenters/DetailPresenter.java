@@ -1,9 +1,7 @@
 package com.alansolisflores.movies.presenters;
 
 import com.alansolisflores.movies.contracts.DetailContract;
-import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.entities.objects.Video;
-import com.alansolisflores.movies.interactors.DetailInteractor;
 
 import java.util.List;
 

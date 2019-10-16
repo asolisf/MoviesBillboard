@@ -1,7 +1,6 @@
 package com.alansolisflores.movies.interactors;
 
 
-import com.alansolisflores.movies.contracts.MoviesContract;
 import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.entities.requests.MoviesRequest;

@@ -21,7 +21,8 @@ import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.adapters.MoviePreviewAdapter;
 import com.alansolisflores.movies.components.DaggerPresenterComponent;
 import com.alansolisflores.movies.components.PresenterComponent;
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
+import com.alansolisflores.movies.contracts.UpcomingContract;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.UpcomingPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
@@ -31,8 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-public class UpcomingFragment extends Fragment implements MoviesContract.View,
+public class UpcomingFragment extends Fragment implements UpcomingContract.View,
 Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     private View view;
@@ -43,8 +45,8 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     private List<Movie> movieList;
 
-    @Inject
-    private MoviesContract.Presenter presenter;
+    //@Inject
+    UpcomingPresenter presenter;
 
     private RelativeLayout loadingDataLayout;
 
@@ -55,8 +57,8 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     public UpcomingFragment(){
         this.movieList = new ArrayList<Movie>();
-        PresenterComponent presenterComponent = DaggerPresenterComponent.create();
-        presenterComponent.Inject(this);
+        //PresenterComponent presenterComponent = DaggerPresenterComponent.create();
+        //presenterComponent.Inject(this);
     }
 
     @Override

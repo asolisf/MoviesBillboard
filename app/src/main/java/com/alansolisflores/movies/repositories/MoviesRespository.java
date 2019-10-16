@@ -1,7 +1,9 @@
 package com.alansolisflores.movies.repositories;
 
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.contracts.SearchContract;
+import com.alansolisflores.movies.contracts.TopRatedContract;
+import com.alansolisflores.movies.contracts.UpcomingContract;
 import com.alansolisflores.movies.entities.enums.Section;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.entities.objects.MovieCache;
@@ -14,11 +16,13 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class MoviesRespository implements MoviesContract.Repository, SearchContract.Repository {
+public class MoviesRespository implements PopularContract.Repository,
+        TopRatedContract.Repository,
+        UpcomingContract.Repository,
+        SearchContract.Repository {
 
     private Realm realm;
 
-    @Inject
     public MoviesRespository(){}
 
     @Override

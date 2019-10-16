@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.adapters.MoviesListItemAdapter;
-import com.alansolisflores.movies.components.DaggerPresenterComponent;
 import com.alansolisflores.movies.components.PresenterComponent;
 import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.entities.objects.Movie;
@@ -37,14 +36,14 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     private ImageView backImage;
 
-    @Inject
-    private SearchContract.Presenter presenter;
+    //@Inject
+    SearchPresenter presenter;
 
     private final int MIN_LENGTH = 2;
 
     public SearchActivity(){
-        PresenterComponent presenterComponent = DaggerPresenterComponent.create();
-        presenterComponent.Inject(this);
+        //PresenterComponent presenterComponent = DaggerPresenterComponent.create();
+        //presenterComponent.Inject(this);
     }
 
     @Override

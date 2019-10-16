@@ -7,10 +7,9 @@ import com.alansolisflores.movies.modules.PresenterModule;
 import com.alansolisflores.movies.views.MovieDetailActivity;
 import com.alansolisflores.movies.views.SearchActivity;
 
-import dagger.BindsInstance;
 import dagger.Component;
 
-@Component(modules = PresenterModule.class)
+@Component(modules = {PresenterModule.class})
 public interface PresenterComponent {
     void Inject(PopularFragment popularFragment);
     void Inject(TopRatedFragment topRatedFragment);

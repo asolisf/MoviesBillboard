@@ -1,6 +1,6 @@
 package com.alansolisflores.movies.interactors;
 
-import com.alansolisflores.movies.contracts.MoviesContract;
+import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.entities.enums.Section;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.entities.requests.MoviesRequest;
@@ -17,17 +17,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TopRatedInteractor implements MoviesContract.Interactor, Callback<MoviesResponse> {
+public class TopRatedInteractor implements PopularContract.Interactor, Callback<MoviesResponse> {
 
-    private MoviesContract.InteractorOutput interactorOutput;
+    private PopularContract.InteractorOutput interactorOutput;
 
-    private final MoviesContract.Repository repository;
+    private final PopularContract.Repository repository;
 
     private final MoviesRequest moviesRequest;
 
     @Inject
-    public TopRatedInteractor(@Named("InteractorOutputPresenter") MoviesContract.InteractorOutput interactorOutput,
-                             MoviesContract.Repository repository,
+    public TopRatedInteractor(@Named("InteractorOutputPresenter") PopularContract.InteractorOutput interactorOutput,
+                             PopularContract.Repository repository,
                              MoviesRequest moviesRequest){
         this.interactorOutput = interactorOutput;
         this.repository = repository;
