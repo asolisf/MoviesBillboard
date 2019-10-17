@@ -24,7 +24,7 @@ import com.alansolisflores.movies.contracts.UpcomingContract;
 import com.alansolisflores.movies.di.components.DaggerUpcomingComponent;
 import com.alansolisflores.movies.di.components.UpcomingComponent;
 import com.alansolisflores.movies.di.modules.UpcomingModule;
-import com.alansolisflores.movies.entities.objects.Movie;
+import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.UpcomingPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
 import com.alansolisflores.movies.views.SearchActivity;

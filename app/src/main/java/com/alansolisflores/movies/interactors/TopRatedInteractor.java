@@ -1,18 +1,16 @@
 package com.alansolisflores.movies.interactors;
 
-import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.contracts.TopRatedContract;
-import com.alansolisflores.movies.entities.enums.Section;
-import com.alansolisflores.movies.entities.objects.Movie;
-import com.alansolisflores.movies.entities.requests.MoviesRequest;
-import com.alansolisflores.movies.entities.responses.MoviesResponse;
+import com.alansolisflores.movies.mocks.repositories.entities.enums.Section;
+import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
+import com.alansolisflores.movies.mocks.repositories.entities.requests.MoviesRequest;
+import com.alansolisflores.movies.mocks.repositories.entities.responses.MoviesResponse;
 import com.alansolisflores.movies.helpers.Config;
 
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import retrofit2.Call;
 import retrofit2.Callback;

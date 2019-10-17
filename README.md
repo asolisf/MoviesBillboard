@@ -2,8 +2,7 @@
 
 Overviews, rating and trailers movies.
 
-## VIPER Architecture Pattern
-(View, Interactor, Presenter, Entity, Repository)
+## VIPER Architecture Pattern (View, Interactor, Presenter, Entity, Repository)
 
 * **View:** Capa de interacción con el usuario.
 * **Interactor:** Se encarga de responder las peticiones de datos ya sea de la memoria cache

@@ -1,13 +1,11 @@
-package com.alansolisflores.movies.entities.responses;
+package com.alansolisflores.movies.mocks.repositories.entities.responses;
 
-import com.alansolisflores.movies.entities.objects.Movie;
+import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmObject;
 
 public class MoviesResponse {
 

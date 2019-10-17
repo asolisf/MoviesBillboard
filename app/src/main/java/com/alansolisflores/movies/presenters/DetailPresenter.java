@@ -1,7 +1,7 @@
 package com.alansolisflores.movies.presenters;
 
 import com.alansolisflores.movies.contracts.DetailContract;
-import com.alansolisflores.movies.entities.objects.Video;
+import com.alansolisflores.movies.mocks.repositories.entities.objects.Video;
 
 import java.util.List;
 

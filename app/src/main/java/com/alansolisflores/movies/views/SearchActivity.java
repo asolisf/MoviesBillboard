@@ -18,7 +18,7 @@ import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.di.components.DaggerSearchComponent;
 import com.alansolisflores.movies.di.components.SearchComponent;
 import com.alansolisflores.movies.di.modules.SearchModule;
-import com.alansolisflores.movies.entities.objects.Movie;
+import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.SearchPresenter;
 
 import java.util.ArrayList;

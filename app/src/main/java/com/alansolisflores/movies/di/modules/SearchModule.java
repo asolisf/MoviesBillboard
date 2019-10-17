@@ -1,12 +1,10 @@
 package com.alansolisflores.movies.di.modules;
 
 import com.alansolisflores.movies.contracts.SearchContract;
-import com.alansolisflores.movies.entities.requests.MoviesRequest;
+import com.alansolisflores.movies.mocks.repositories.entities.requests.MoviesRequest;
 import com.alansolisflores.movies.interactors.SearchInteractor;
 import com.alansolisflores.movies.presenters.SearchPresenter;
-import com.alansolisflores.movies.repositories.MoviesRespository;
-
-import javax.inject.Singleton;
+import com.alansolisflores.movies.mocks.repositories.MoviesRespository;
 
 import dagger.Module;
 import dagger.Provides;

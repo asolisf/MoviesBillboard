@@ -3,7 +3,7 @@ package com.alansolisflores.movies.di.modules;
 import android.app.Application;
 import android.content.Context;
 
-import com.alansolisflores.movies.entities.requests.MoviesRequest;
+import com.alansolisflores.movies.mocks.repositories.entities.requests.MoviesRequest;
 import com.alansolisflores.movies.helpers.Config;
 import com.google.gson.Gson;
 
