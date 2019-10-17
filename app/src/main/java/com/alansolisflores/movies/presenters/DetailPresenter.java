@@ -18,6 +18,7 @@ public class DetailPresenter implements  DetailContract.Presenter,DetailContract
                           DetailContract.Interactor interactor){
         this.view = view;
         this.interactor = interactor;
+        this.interactor.Subscribe(this);
     }
 
     @Override
