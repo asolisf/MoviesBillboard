@@ -1,6 +1,6 @@
-package com.alansolisflores.movies.mocks.repositories.entities.objects;
+package com.alansolisflores.movies.entities.objects;
 
-import com.alansolisflores.movies.mocks.repositories.entities.enums.Section;
+import com.alansolisflores.movies.entities.enums.Section;
 
 import java.util.Date;
 import io.realm.RealmList;

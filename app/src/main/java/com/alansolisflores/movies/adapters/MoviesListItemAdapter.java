@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alansolisflores.movies.R;
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
+import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.helpers.Config;
 import com.squareup.picasso.Picasso;
 

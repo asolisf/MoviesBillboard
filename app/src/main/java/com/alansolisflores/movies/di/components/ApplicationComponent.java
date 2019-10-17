@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.alansolisflores.movies.di.modules.ApplicationModule;
-import com.alansolisflores.movies.mocks.repositories.entities.requests.MoviesRequest;
+import com.alansolisflores.movies.entities.requests.MoviesRequest;
 
 import javax.inject.Singleton;
 

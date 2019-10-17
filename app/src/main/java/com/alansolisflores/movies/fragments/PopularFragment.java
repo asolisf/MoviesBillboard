@@ -24,7 +24,7 @@ import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.di.components.DaggerPopularComponent;
 import com.alansolisflores.movies.di.components.PopularComponent;
 import com.alansolisflores.movies.di.modules.PopularModule;
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
+import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.PopularPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
 import com.alansolisflores.movies.views.SearchActivity;

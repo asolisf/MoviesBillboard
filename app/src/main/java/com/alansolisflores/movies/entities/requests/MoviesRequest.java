@@ -1,7 +1,7 @@
-package com.alansolisflores.movies.mocks.repositories.entities.requests;
+package com.alansolisflores.movies.entities.requests;
 
-import com.alansolisflores.movies.mocks.repositories.entities.responses.MoviesResponse;
-import com.alansolisflores.movies.mocks.repositories.entities.responses.VideosResponse;
+import com.alansolisflores.movies.entities.responses.MoviesResponse;
+import com.alansolisflores.movies.entities.responses.VideosResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

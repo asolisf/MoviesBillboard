@@ -1,12 +1,12 @@
-package com.alansolisflores.movies.mocks.repositories;
+package com.alansolisflores.movies.repositories;
 
 import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.contracts.SearchContract;
 import com.alansolisflores.movies.contracts.TopRatedContract;
 import com.alansolisflores.movies.contracts.UpcomingContract;
-import com.alansolisflores.movies.mocks.repositories.entities.enums.Section;
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
-import com.alansolisflores.movies.mocks.repositories.entities.objects.MovieCache;
+import com.alansolisflores.movies.entities.enums.Section;
+import com.alansolisflores.movies.entities.objects.Movie;
+import com.alansolisflores.movies.entities.objects.MovieCache;
 
 import java.util.Date;
 import java.util.List;

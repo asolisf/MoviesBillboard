@@ -24,7 +24,7 @@ import com.alansolisflores.movies.contracts.TopRatedContract;
 import com.alansolisflores.movies.di.components.DaggerTopRatedComponent;
 import com.alansolisflores.movies.di.components.TopRatedComponent;
 import com.alansolisflores.movies.di.modules.TopRatedModule;
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
+import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.TopRatedPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
 import com.alansolisflores.movies.views.SearchActivity;

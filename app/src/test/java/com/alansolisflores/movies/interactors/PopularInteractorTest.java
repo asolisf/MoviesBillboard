@@ -1,14 +1,12 @@
 package com.alansolisflores.movies.interactors;
 
 import com.alansolisflores.movies.contracts.PopularContract;
-import com.alansolisflores.movies.helpers.Config;
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
-import com.alansolisflores.movies.mocks.repositories.entities.requests.MoviesRequest;
-import com.alansolisflores.movies.mocks.repositories.entities.responses.MoviesResponse;
+import com.alansolisflores.movies.entities.objects.Movie;
+import com.alansolisflores.movies.entities.requests.MoviesRequest;
+import com.alansolisflores.movies.entities.responses.MoviesResponse;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -19,7 +17,6 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

@@ -1,4 +1,4 @@
-package com.alansolisflores.movies.mocks.repositories.entities.objects;
+package com.alansolisflores.movies.entities.objects;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -2,8 +2,8 @@ package com.alansolisflores.movies.interactors;
 
 
 import com.alansolisflores.movies.contracts.DetailContract;
-import com.alansolisflores.movies.mocks.repositories.entities.requests.MoviesRequest;
-import com.alansolisflores.movies.mocks.repositories.entities.responses.VideosResponse;
+import com.alansolisflores.movies.entities.requests.MoviesRequest;
+import com.alansolisflores.movies.entities.responses.VideosResponse;
 import com.alansolisflores.movies.helpers.Config;
 
 import javax.inject.Inject;

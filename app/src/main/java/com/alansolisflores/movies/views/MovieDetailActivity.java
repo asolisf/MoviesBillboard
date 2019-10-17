@@ -15,8 +15,8 @@ import com.alansolisflores.movies.contracts.DetailContract;
 import com.alansolisflores.movies.di.components.DaggerDetailComponent;
 import com.alansolisflores.movies.di.components.DetailComponent;
 import com.alansolisflores.movies.di.modules.DetailModule;
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Movie;
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Video;
+import com.alansolisflores.movies.entities.objects.Movie;
+import com.alansolisflores.movies.entities.objects.Video;
 import com.alansolisflores.movies.helpers.Config;
 import com.alansolisflores.movies.helpers.BlurTransformation;
 import com.alansolisflores.movies.presenters.DetailPresenter;
@@ -133,7 +133,8 @@ implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitialize
     @Override
     public void GetData(List<Video> videoList) {
         if(videoList.size() > 0 && this.youTubePlayer != null){
-            this.youTubePlayer.cueVideo(videoList.get(0).getId());
+            this.youTubePlayer.loadVideo(videoList.get(0).getId());
+            this.youTubePlayer.play();
         }
     }
 

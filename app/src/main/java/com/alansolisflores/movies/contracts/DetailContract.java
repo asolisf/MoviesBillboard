@@ -1,6 +1,6 @@
 package com.alansolisflores.movies.contracts;
 
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Video;
+import com.alansolisflores.movies.entities.objects.Video;
 
 import java.util.List;
 

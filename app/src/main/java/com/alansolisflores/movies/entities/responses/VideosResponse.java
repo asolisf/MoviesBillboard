@@ -1,6 +1,6 @@
-package com.alansolisflores.movies.mocks.repositories.entities.responses;
+package com.alansolisflores.movies.entities.responses;
 
-import com.alansolisflores.movies.mocks.repositories.entities.objects.Video;
+import com.alansolisflores.movies.entities.objects.Video;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
