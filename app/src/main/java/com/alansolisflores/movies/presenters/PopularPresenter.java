@@ -19,6 +19,7 @@ public class PopularPresenter
                             PopularContract.Interactor interactor){
         this.view = view;
         this.interactor = interactor;
+        this.interactor.Subscribe(this);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.alansolisflores.movies.interactors;
 
 import com.alansolisflores.movies.contracts.PopularContract;
+import com.alansolisflores.movies.contracts.TopRatedContract;
 import com.alansolisflores.movies.entities.enums.Section;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.entities.requests.MoviesRequest;
@@ -17,19 +18,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TopRatedInteractor implements PopularContract.Interactor, Callback<MoviesResponse> {
+public class TopRatedInteractor implements TopRatedContract.Interactor, Callback<MoviesResponse> {
 
-    private PopularContract.InteractorOutput interactorOutput;
+    private TopRatedContract.InteractorOutput interactorOutput;
 
-    private final PopularContract.Repository repository;
+    private final TopRatedContract.Repository repository;
 
     private final MoviesRequest moviesRequest;
 
     @Inject
-    public TopRatedInteractor(@Named("InteractorOutputPresenter") PopularContract.InteractorOutput interactorOutput,
-                             PopularContract.Repository repository,
+    public TopRatedInteractor(TopRatedContract.Repository repository,
                              MoviesRequest moviesRequest){
-        this.interactorOutput = interactorOutput;
         this.repository = repository;
         this.moviesRequest = moviesRequest;
     }
@@ -44,6 +43,16 @@ public class TopRatedInteractor implements PopularContract.Interactor, Callback<
     @Override
     public void Dispose() {
         this.repository.Dispose();
+    }
+
+    @Override
+    public void Subscribe(TopRatedContract.InteractorOutput interactorOutput) {
+        this.interactorOutput = interactorOutput;
+    }
+
+    @Override
+    public void Unsubscribe() {
+        this.interactorOutput = null;
     }
 
     @Override

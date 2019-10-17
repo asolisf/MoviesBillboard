@@ -9,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alansolisflores.movies.App;
 import com.alansolisflores.movies.R;
-//import com.alansolisflores.movies.components.DaggerPresenterComponent;
-import com.alansolisflores.movies.components.DaggerPresenterComponent;
 import com.alansolisflores.movies.contracts.DetailContract;
+import com.alansolisflores.movies.di.components.DaggerDetailComponent;
+import com.alansolisflores.movies.di.components.DetailComponent;
+import com.alansolisflores.movies.di.modules.DetailModule;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.entities.objects.Video;
 import com.alansolisflores.movies.helpers.Config;
@@ -46,11 +48,6 @@ implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitialize
     @Inject
     DetailPresenter presenter;
 
-    public MovieDetailActivity(){
-        //DaggerPresenterComponent.builder().viewModule(new ViewModule(this)).build();
-        DaggerPresenterComponent.builder().build().Inject(this);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +76,13 @@ implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitialize
     }
 
     private void initializeProperties(){
+        DetailComponent detailComponent
+                = DaggerDetailComponent.builder()
+                .applicationComponent(App.get(this).component())
+                .detailModule(new DetailModule(this)).build();
+
+        detailComponent.Inject(this);
+
         this.posterImageView = findViewById(R.id.movieImage);
         this.movieBackgroundImageView = findViewById(R.id.movieBackgroundImageView);
         this.titleTextView = findViewById(R.id.movieTitle);
@@ -90,7 +94,6 @@ implements View.OnClickListener, DetailContract.View, YouTubePlayer.OnInitialize
 
         this.customToolbar.setNavigationIcon(R.drawable.ic_left_arrow);
         this.customToolbar.setNavigationOnClickListener(this);
-        //this.presenter = new DetailPresenter(this);
         this.playerView.initialize(Config.GOOGLE_KEY,this);
     }
 

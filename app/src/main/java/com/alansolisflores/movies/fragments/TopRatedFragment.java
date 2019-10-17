@@ -17,11 +17,13 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.alansolisflores.movies.App;
 import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.adapters.MoviesListItemAdapter;
-import com.alansolisflores.movies.components.PresenterComponent;
-import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.contracts.TopRatedContract;
+import com.alansolisflores.movies.di.components.DaggerTopRatedComponent;
+import com.alansolisflores.movies.di.components.TopRatedComponent;
+import com.alansolisflores.movies.di.modules.TopRatedModule;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.TopRatedPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
@@ -31,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 public class TopRatedFragment extends Fragment implements TopRatedContract.View,
         Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener {
@@ -44,7 +45,7 @@ public class TopRatedFragment extends Fragment implements TopRatedContract.View,
 
     private List<Movie> movieList;
 
-    //@Inject
+    @Inject
     TopRatedPresenter presenter;
 
     private RelativeLayout loadingDataLayout;
@@ -55,8 +56,6 @@ public class TopRatedFragment extends Fragment implements TopRatedContract.View,
 
     public TopRatedFragment(){
         this.movieList = new ArrayList<Movie>();
-        //PresenterComponent presenterComponent = DaggerPresenterComponent.create();
-        //presenterComponent.Inject(this);
     }
 
     @Override
@@ -125,6 +124,12 @@ public class TopRatedFragment extends Fragment implements TopRatedContract.View,
     }
 
     private void initializeProperties() {
+        TopRatedComponent topRatedComponent
+                = DaggerTopRatedComponent.builder()
+                .applicationComponent(App.get(getContext()).component())
+                .topRatedModule(new TopRatedModule(this)).build();
+        topRatedComponent.Inject(this);
+
         this.listView = view.findViewById(R.id.moviesListView);
         this.loadingDataLayout = view.findViewById(R.id.loadingDataLayout);
         this.customToolbar = view.findViewById(R.id.toolbar);

@@ -17,10 +17,14 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.alansolisflores.movies.App;
 import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.adapters.MoviePreviewAdapter;
-import com.alansolisflores.movies.components.PresenterComponent;
 import com.alansolisflores.movies.contracts.PopularContract;
+import com.alansolisflores.movies.di.components.DaggerPopularComponent;
+import com.alansolisflores.movies.di.components.PopularComponent;
+import com.alansolisflores.movies.di.modules.ApplicationModule;
+import com.alansolisflores.movies.di.modules.PopularModule;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.PopularPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
@@ -30,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 public class PopularFragment extends Fragment implements PopularContract.View,
 Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
@@ -43,7 +46,7 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     private List<Movie> movieList;
 
-    //@Inject
+    @Inject
     PopularPresenter presenter;
 
     private RelativeLayout loadingDataLayout;
@@ -54,8 +57,6 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     public PopularFragment(){
         this.movieList = new ArrayList<Movie>();
-        //PresenterComponent presenterComponent = DaggerPresenterComponent.create();
-        //presenterComponent.Inject(this);
     }
 
     @Override
@@ -126,6 +127,14 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
     }
 
     private void initializeProperties(){
+        PopularComponent popularComponent =
+                DaggerPopularComponent
+                        .builder()
+                        .applicationComponent(App.get(getContext()).component())
+                        .popularModule(new PopularModule(this))
+                        .build();
+        popularComponent.Inject(this);
+
         this.gridView = view.findViewById(R.id.moviesGridView);
         this.loadingDataLayout = view.findViewById(R.id.loadingDataLayout);
         this.customToolbar = view.findViewById(R.id.toolbar);

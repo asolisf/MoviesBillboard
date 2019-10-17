@@ -20,6 +20,8 @@ public interface TopRatedContract {
     interface Interactor{
         void GetData();
         void Dispose();
+        void Subscribe(TopRatedContract.InteractorOutput interactorOutput);
+        void Unsubscribe();
     }
 
     interface InteractorOutput{

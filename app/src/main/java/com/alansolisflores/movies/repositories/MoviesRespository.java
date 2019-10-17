@@ -23,6 +23,7 @@ public class MoviesRespository implements PopularContract.Repository,
 
     private Realm realm;
 
+    @Inject
     public MoviesRespository(){}
 
     @Override

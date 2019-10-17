@@ -21,6 +21,7 @@ public class UpcomingPresenter
                              UpcomingContract.Interactor interactor){
         this.view = view;
         this.interactor = interactor;
+        this.interactor.Subscribe(this);
     }
 
     @Override

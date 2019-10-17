@@ -19,6 +19,8 @@ public interface SearchContract {
     interface Interactor{
         void LoadDataByTitle(String title);
         void Dispose();
+        void Subscribe(SearchContract.InteractorOutput interactorOutput);
+        void Unsubscribe();
     }
 
     interface  InteractorOutput{

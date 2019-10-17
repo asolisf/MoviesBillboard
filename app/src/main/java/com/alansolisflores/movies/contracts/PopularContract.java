@@ -25,6 +25,8 @@ public interface PopularContract {
     interface Interactor{
         void GetData();
         void Dispose();
+        void Subscribe(PopularContract.InteractorOutput interactorOutput);
+        void Unsubscribe();
     }
 
     interface InteractorOutput{

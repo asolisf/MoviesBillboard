@@ -25,10 +25,8 @@ public class PopularInteractor implements PopularContract.Interactor, Callback<M
     private final MoviesRequest moviesRequest;
 
     @Inject
-    public PopularInteractor(PopularContract.InteractorOutput interactorOutput,
-                             PopularContract.Repository moviesRepository,
+    public PopularInteractor(PopularContract.Repository moviesRepository,
                              MoviesRequest moviesRequest){
-        this.interactorOutput = interactorOutput;
         this.moviesRepository = moviesRepository;
         this.moviesRequest = moviesRequest;
     }
@@ -43,6 +41,16 @@ public class PopularInteractor implements PopularContract.Interactor, Callback<M
     @Override
     public void Dispose() {
         this.moviesRepository.Dispose();
+    }
+
+    @Override
+    public void Subscribe(PopularContract.InteractorOutput interactorOutput) {
+        this.interactorOutput = interactorOutput;
+    }
+
+    @Override
+    public void Unsubscribe() {
+        this.interactorOutput = null;
     }
 
     @Override

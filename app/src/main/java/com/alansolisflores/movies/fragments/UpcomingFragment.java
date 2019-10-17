@@ -17,12 +17,13 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.alansolisflores.movies.App;
 import com.alansolisflores.movies.R;
 import com.alansolisflores.movies.adapters.MoviePreviewAdapter;
-import com.alansolisflores.movies.components.DaggerPresenterComponent;
-import com.alansolisflores.movies.components.PresenterComponent;
-import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.contracts.UpcomingContract;
+import com.alansolisflores.movies.di.components.DaggerUpcomingComponent;
+import com.alansolisflores.movies.di.components.UpcomingComponent;
+import com.alansolisflores.movies.di.modules.UpcomingModule;
 import com.alansolisflores.movies.entities.objects.Movie;
 import com.alansolisflores.movies.presenters.UpcomingPresenter;
 import com.alansolisflores.movies.views.MovieDetailActivity;
@@ -32,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 public class UpcomingFragment extends Fragment implements UpcomingContract.View,
 Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
@@ -45,7 +45,7 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     private List<Movie> movieList;
 
-    //@Inject
+    @Inject
     UpcomingPresenter presenter;
 
     private RelativeLayout loadingDataLayout;
@@ -57,8 +57,6 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
 
     public UpcomingFragment(){
         this.movieList = new ArrayList<Movie>();
-        //PresenterComponent presenterComponent = DaggerPresenterComponent.create();
-        //presenterComponent.Inject(this);
     }
 
     @Override
@@ -128,6 +126,13 @@ Toolbar.OnMenuItemClickListener, AdapterView.OnItemClickListener{
     }
 
     private void initializeProperties(){
+
+        UpcomingComponent upcomingComponent =
+                DaggerUpcomingComponent.builder()
+                        .applicationComponent(App.get(getContext()).component())
+                        .upcomingModule(new UpcomingModule(this)).build();
+        upcomingComponent.Inject(this);
+
         this.gridView = view.findViewById(R.id.moviesGridView);
         this.loadingDataLayout = view.findViewById(R.id.loadingDataLayout);
         this.customToolbar = view.findViewById(R.id.toolbar);

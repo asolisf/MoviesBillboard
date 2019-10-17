@@ -26,10 +26,8 @@ public class SearchInteractor implements SearchContract.Interactor, Callback<Mov
     private final MoviesRequest moviesRequest;
 
     @Inject
-    public SearchInteractor(SearchContract.InteractorOutput interactorOutput,
-                             SearchContract.Repository repository,
-                             MoviesRequest moviesRequest){
-        this.interactorOutput = interactorOutput;
+    public SearchInteractor(SearchContract.Repository repository,
+                            MoviesRequest moviesRequest){
         this.repository = repository;
         this.moviesRequest = moviesRequest;
     }
@@ -45,6 +43,16 @@ public class SearchInteractor implements SearchContract.Interactor, Callback<Mov
     @Override
     public void Dispose() {
         this.repository.Dispose();
+    }
+
+    @Override
+    public void Subscribe(SearchContract.InteractorOutput interactorOutput) {
+        this.interactorOutput = interactorOutput;
+    }
+
+    @Override
+    public void Unsubscribe() {
+        this.interactorOutput = null;
     }
 
     @Override

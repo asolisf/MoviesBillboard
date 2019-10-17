@@ -16,6 +16,8 @@ public interface DetailContract {
 
     interface Interactor{
         void GetData(int id);
+        void Subscribe(InteractorOutput interactorOutput);
+        void Unsubscribe();
     }
 
     interface InteractorOutput{

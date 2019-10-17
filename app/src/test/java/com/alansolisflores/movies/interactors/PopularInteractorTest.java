@@ -1,7 +1,7 @@
 package com.alansolisflores.movies.interactors;
 
-import com.alansolisflores.movies.components.DaggerInteractorComponent;
-import com.alansolisflores.movies.components.InteractorComponent;
+import com.alansolisflores.movies.di.components.DaggerInteractorComponent;
+import com.alansolisflores.movies.di.components.InteractorComponent;
 import com.alansolisflores.movies.contracts.PopularContract;
 import com.alansolisflores.movies.modules.ApiServiceModuleMock;
 import com.alansolisflores.movies.modules.MoviesRepositoryModuleMock;

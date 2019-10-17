@@ -17,16 +17,10 @@ public class DetailInteractor implements DetailContract.Interactor, Callback<Vid
 
     private DetailContract.InteractorOutput interactorOutput;
 
-    private final PopularContract.Repository moviesRepository;
-
     private final MoviesRequest moviesRequest;
 
     @Inject
-    public DetailInteractor(DetailContract.InteractorOutput interactorOutput,
-                             PopularContract.Repository moviesRepository,
-                             MoviesRequest moviesRequest){
-        this.interactorOutput = interactorOutput;
-        this.moviesRepository = moviesRepository;
+    public DetailInteractor(MoviesRequest moviesRequest){
         this.moviesRequest = moviesRequest;
     }
 
@@ -35,6 +29,16 @@ public class DetailInteractor implements DetailContract.Interactor, Callback<Vid
         Call<VideosResponse> videosResponseCall =
                 this.moviesRequest.getVideos(id, Config.API_KEY);
         videosResponseCall.enqueue(this);
+    }
+
+    @Override
+    public void Subscribe(DetailContract.InteractorOutput interactorOutput) {
+        this.interactorOutput = interactorOutput;
+    }
+
+    @Override
+    public void Unsubscribe() {
+        this.interactorOutput = null;
     }
 
     @Override
