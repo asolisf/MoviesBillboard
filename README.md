@@ -1,6 +1,6 @@
 # MBillboard
 
-Overviews, rating and trailers movies.
+Overviews, rating and trailers movies app.
 
 ## VIPER Architecture Pattern (View, Interactor, Presenter, Entity, Repository)
 
@@ -25,6 +25,12 @@ Cada parte del código debe realizar solo una tarea en especifico.
 * Metodos y clases que solo realizen una tarea y tengan una razon de ser.
 * Código pensado para escalar y refactorizar.
 * Uso de interfaces en las declaraciones en vez de implementaciones.
+* Utilizar patrones  creacionales, de comportamiento o arquitectura. Esto
+de acuerdo a las necesidades del proyecto.
+
+## APK
+
+[AppCenter APK](https://install.appcenter.ms/users/alansolisflores-outlook.com/apps/mbilloboard/distribution_groups/public%20access)
 
 ## Libraries
 
@@ -33,4 +39,20 @@ Cada parte del código debe realizar solo una tarea en especifico.
 * Picasso
 * Youtube Android Player
 * Mockito
-* Gson 
+* Gson
+* Realm
+
+## Screenshots
+
+![Screenshot 1](Screenshots/Screenshot_1.png)
+![Screenshot 2](Screenshots/Screenshot_2.png)
+![Screenshot 3](Screenshots/Screenshot_3.png)
+![Screenshot 4](Screenshots/Screenshot_4.png)
+![Screenshot 5](Screenshots/Screenshot_5.png)
+
+## MockUps
+
+![Popular](Screenshots/Popular.png)
+![Upcoming](Screenshots/Upcoming.png)
+![TopRated](Screenshots/TopRated.png)
+![Detail](Screenshots/Detail.png)

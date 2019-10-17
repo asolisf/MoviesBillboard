@@ -18,6 +18,7 @@ public class SearchPresenter implements SearchContract.Presenter,SearchContract.
                            SearchContract.Interactor interactor){
         this.view = view;
         this.interactor = interactor;
+        this.interactor.Subscribe(this);
     }
 
     @Override
